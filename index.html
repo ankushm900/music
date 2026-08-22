@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cassette Adda — 90s Indian Cassette Shop Nostalgia Radio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Noto+Sans+Devanagari:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark:#1a0f1f;        /* deep maroon-purple night */
+    --darker:#0f0813;
+    --neon-pink:#ff3f8e;
+    --neon-cyan:#38e8e0;
+    --tape-brown:#5c3a21;
+    --cream:#f6ead6;
+    --muted:#a893a8;
+    --line: rgba(246,234,214,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(255,63,142,0.15), transparent 55%),
+      radial-gradient(ellipse at 85% 10%, rgba(56,232,224,0.12), transparent 50%),
+      linear-gradient(180deg, var(--darker), var(--dark) 40%, var(--darker));
+    color:var(--cream);
+    font-family:'DM Sans', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+
+  nav{
+    max-width:1040px; margin:0 auto; padding:22px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:.9rem;
+  }
+  .brand{font-family:'Baloo 2', sans-serif; font-size:1.3rem; color:var(--neon-pink); letter-spacing:.02em;}
+  nav .links{display:flex; gap:22px; align-items:center;}
+  nav .links a{opacity:.8; text-decoration:none;}
+  nav .links a:hover{opacity:1; color:var(--neon-cyan);}
+  .support-pill{
+    background:var(--neon-pink); color:var(--darker); font-weight:700;
+    padding:7px 16px; border-radius:999px; text-decoration:none; font-size:.85rem;
+  }
+
+  .hero{max-width:820px; margin:0 auto; padding:20px 24px 60px; text-align:center;}
+  .eyebrow{color:var(--muted); text-transform:uppercase; letter-spacing:.22em; font-size:.7rem;}
+  h1.title{
+    font-family:'Baloo 2', sans-serif; font-size:clamp(2.4rem,7vw,4rem);
+    margin:10px 0 4px; color:var(--cream);
+    text-shadow:0 0 24px rgba(255,63,142,0.35);
+  }
+  h1.title .hi{display:block; font-family:'Noto Sans Devanagari', sans-serif; font-size:clamp(2rem,6vw,3rem); color:var(--neon-cyan);}
+  .tagline{color:var(--muted); max-width:520px; margin:14px auto 34px; font-size:1rem; line-height:1.65;}
+
+  /* ---------- cassette player (signature element) ---------- */
+  .cassette{
+    position:relative; width:280px; margin:0 auto 20px;
+    background:linear-gradient(160deg, #2a1830, #150a19);
+    border:2px solid var(--neon-pink);
+    border-radius:16px; padding:22px 20px 18px;
+    box-shadow:0 0 0 1px rgba(255,63,142,0.15), 0 0 40px rgba(255,63,142,0.25);
+  }
+  .reels{display:flex; justify-content:space-between; padding:0 18px; margin-bottom:14px;}
+  .reel{
+    width:64px; height:64px; border-radius:50%;
+    background:radial-gradient(circle, var(--darker) 0 18%, var(--tape-brown) 19% 40%, var(--darker) 41% 100%);
+    border:2px solid rgba(246,234,214,0.25);
+    position:relative;
+  }
+  .reel::before{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:
+      linear-gradient(90deg, transparent 48%, rgba(246,234,214,0.35) 49% 51%, transparent 52%),
+      linear-gradient(0deg, transparent 48%, rgba(246,234,214,0.35) 49% 51%, transparent 52%);
+  }
+  .reel.spin{animation:spin 1.8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .tape-label{
+    background:var(--cream); color:var(--darker); border-radius:6px;
+    padding:6px 10px; font-family:'Baloo 2', sans-serif; font-size:.85rem;
+    text-align:center; margin-bottom:16px;
+  }
+  .seek-row{display:flex; align-items:center; gap:8px; margin-bottom:14px;}
+  .time{font-size:.72rem; color:var(--muted); min-width:32px; text-align:center;}
+  .slider{
+    -webkit-appearance:none; appearance:none; flex:1; height:5px; border-radius:99px;
+    background:rgba(246,234,214,0.18); outline:none; cursor:pointer;
+  }
+  .slider::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:14px; height:14px; border-radius:50%;
+    background:var(--neon-cyan); box-shadow:0 0 8px rgba(56,232,224,0.7); cursor:pointer;
+  }
+  .slider::-moz-range-thumb{
+    width:14px; height:14px; border-radius:50%; border:none;
+    background:var(--neon-cyan); box-shadow:0 0 8px rgba(56,232,224,0.7); cursor:pointer;
+  }
+  .controls-row{display:flex; align-items:center; gap:8px; margin-bottom:14px;}
+  .volume-row{display:flex; align-items:center; gap:10px; margin-bottom:4px;}
+  .volume-row .slider{flex:1;}
+  #playBtn{
+    flex:1; padding:12px; border-radius:10px; border:none; cursor:pointer;
+    background:linear-gradient(90deg, var(--neon-pink), #b91d63);
+    color:var(--cream); font-family:'Baloo 2', sans-serif; font-size:1rem;
+    transition:transform .2s ease;
+  }
+  #playBtn:hover{transform:scale(1.02);}
+  #playBtn:active{transform:scale(.97);}
+  .ctrl-btn{
+    padding:10px 12px; border-radius:10px; border:1px solid var(--line);
+    background:rgba(246,234,214,0.06); color:var(--cream); cursor:pointer;
+    font-size:1rem; transition:.2s;
+  }
+  .ctrl-btn:hover{background:rgba(56,232,224,0.15); border-color:var(--neon-cyan);}
+  .ctrl-btn:active{transform:scale(.94);}
+  .ctrl-btn.small{padding:8px 10px; font-size:.9rem;}
+  .ctrl-btn[aria-pressed="true"]{background:var(--neon-cyan); border-color:var(--neon-cyan); color:var(--darker);}
+  .now-playing{margin-top:16px; font-size:.85rem; color:var(--muted); min-height:1.2em;}
+
+  .toggle-row{display:flex; justify-content:center; gap:10px; margin-top:22px; flex-wrap:wrap;}
+  .chip{
+    border:1px solid var(--line); background:transparent; color:var(--cream);
+    padding:7px 16px; border-radius:999px; font-size:.85rem; cursor:pointer; transition:.2s;
+  }
+  .chip[aria-pressed="true"]{background:var(--neon-cyan); color:var(--darker); border-color:var(--neon-cyan); font-weight:700;}
+
+  section{max-width:820px; margin:0 auto; padding:70px 24px; border-top:1px solid var(--line);}
+  .label{color:var(--neon-cyan); font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; margin-bottom:10px;}
+  h2{font-family:'Baloo 2', sans-serif; font-size:1.9rem; margin-bottom:18px; color:var(--cream);}
+  p{color:#cbb9c9; line-height:1.75; font-size:1rem;}
+  .feature-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:34px;}
+  .feature{border:1px solid var(--line); border-radius:14px; padding:20px;}
+  .feature h3{font-family:'Baloo 2', sans-serif; font-size:1.05rem; color:var(--neon-pink); margin-bottom:8px; font-weight:normal;}
+  .feature p{font-size:.92rem;}
+  @media(max-width:680px){.feature-grid{grid-template-columns:1fr;}}
+
+  details{border-bottom:1px solid var(--line); padding:16px 0;}
+  summary{cursor:pointer; font-weight:600; color:var(--cream); list-style:none; display:flex; justify-content:space-between;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+"; color:var(--neon-cyan); font-size:1.3rem;}
+  details[open] summary::after{content:"–";}
+  details p{margin-top:10px;}
+
+  footer{max-width:820px; margin:0 auto; padding:50px 24px 70px; text-align:center; color:var(--muted); font-size:.85rem;}
+  footer .brand2{font-family:'Baloo 2', sans-serif; color:var(--neon-pink); font-size:1.1rem; display:block; margin-bottom:6px;}
+  footer .social{margin:16px 0; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;}
+  footer .social a{text-decoration:underline; text-underline-offset:3px;}
+  footer .disclaimer{max-width:520px; margin:18px auto 0; font-size:.78rem; opacity:.75;}
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="brand">Cassette Adda</span>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a class="support-pill" href="#support">❤️ Support</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <p class="eyebrow">90s Bollywood · Cassette Shop Nostalgia Radio</p>
+    <h1 class="title">Cassette Adda<span class="hi">कैसेट अड्डा</span></h1>
+    <p class="tagline">Gali ke corner wali cassette dukaan, kaanch ke rack mein saji tapes, aur dukaandaar ke speaker se bajta gaana — wahi 90s ka adda, ab seedha browser mein.</p>
+
+    <div class="cassette">
+      <div class="reels">
+        <div class="reel" id="reelL"></div>
+        <div class="reel" id="reelR"></div>
+      </div>
+      <div class="tape-label" id="trackLabel">SIDE A — Track 1</div>
+
+      <div class="seek-row">
+        <span class="time" id="curTime">0:00</span>
+        <input type="range" id="seekBar" class="slider" min="0" max="100" value="0" step="0.1">
+        <span class="time" id="durTime">0:00</span>
+      </div>
+
+      <div class="controls-row">
+        <button id="shuffleBtn" class="ctrl-btn small" aria-pressed="false" aria-label="Shuffle">🔀</button>
+        <button id="prevBtn" class="ctrl-btn" aria-label="Previous">⏮</button>
+        <button id="playBtn" aria-pressed="false">▶ Chalao</button>
+        <button id="nextBtn" class="ctrl-btn" aria-label="Next">⏭</button>
+        <button id="repeatBtn" class="ctrl-btn small" aria-pressed="false" aria-label="Repeat">🔁</button>
+      </div>
+
+      <div class="volume-row">
+        <button id="volBtn" class="ctrl-btn" aria-label="Mute">🔊</button>
+        <input type="range" id="volBar" class="slider" min="0" max="100" value="80" step="1">
+      </div>
+
+      <p class="now-playing" id="nowPlaying">Tape ruki hui hai — chalane ke liye button dabao.</p>
+    </div>
+
+    <div class="toggle-row">
+      <button class="chip" id="staticMode" aria-pressed="false">📼 VHS Static</button>
+      <button class="chip" id="shareBtn" aria-pressed="false">🔗 Share Adda</button>
+    </div>
+
+    <!--
+      ══════════════════════════════════════════════════════════
+      🎵 YAHAN APNE GAANE ADD KAREIN (ADD YOUR SONGS HERE):
+      "songs" folder ke andar abhi 3 TEST tracks hain — sirf setup
+      verify karne ke liye (plain test tones hain, koi asli gaana nahi).
+
+      APNE ASLI GAANE LAGANE KE LIYE:
+      1. "songs" folder ke andar apni MP3 files daalo — naam SIMPLE
+         rakho (spaces/brackets bilkul mat rakho).
+      2. Neeche script mein "playlist" list dikhegi — usme har
+         gaane ke liye ek line hai. Apni files/titles se badal do.
+      3. Sirf EK gaana chahiye to list mein sirf ek hi entry rakho
+         (Next/Previous tab kaam nahi karenge, but baaki sab chalega).
+      ══════════════════════════════════════════════════════════
+    -->
+    <audio id="radioAudio" preload="metadata"></audio>
+  </header>
+
+  <section id="about">
+    <p class="label">About</p>
+    <h2>Ek Adda Jo Kabhi Band Nahi Hota</h2>
+    <p>Cassette Adda ek free ambient radio hai jo 90s ki us classic Indian cassette-shop ka mahaul wapas laata hai — kaanch ke rack mein saji tapes, dukaandaar ke speaker se bajta gaana, aur wahi non-stop hits jo poori gali sunti thi. Button dabao aur wahi purana adda mehsoos karo, seedha apne browser mein — na sign-up, na app.</p>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>90s Non-Stop Mix</h3>
+        <p>Us daur ke sabse popular cassette-shop gaane, ek loop mein bajte rehte hain.</p>
+      </div>
+      <div class="feature">
+        <h3>VHS Static Mode</h3>
+        <p>Ek click mein page ko purani TV/VHS static jaisa retro look de do.</p>
+      </div>
+      <div class="feature">
+        <h3>Hamesha Khula</h3>
+        <p>24x7 free, bina sign-up ke — jaise asli adda, kabhi band nahi hota.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <p class="label">FAQ</p>
+    <h2>Cassette Adda, Samjhaya Gaya</h2>
+    <details>
+      <summary>Cassette Adda kya hai?</summary>
+      <p>Yeh ek free ambient radio website hai jo 90s ke Indian cassette-shop ka mahaul recreate karti hai — nostalgic gaane aur us daur ki vibe ke saath.</p>
+    </details>
+    <details>
+      <summary>Kya yeh free hai?</summary>
+      <p>Haan, Cassette Adda bilkul free hai, bina kisi sign-up ke, desktop aur mobile dono par chalta hai.</p>
+    </details>
+    <details>
+      <summary>Gaane kahan se aate hain?</summary>
+      <p>Yeh template khud ki audio file (jaise MP3) use karta hai, jise "songs" folder mein add kiya ja sakta hai — koi external streaming ki zaroorat nahi.</p>
+    </details>
+    <details>
+      <summary>Kya main is design ko badal sakta hoon?</summary>
+      <p>Bilkul — sabhi colors, fonts aur animations upar wale CSS variables (:root) se control hote hain, asaani se customize kiya ja sakta hai.</p>
+    </details>
+  </section>
+
+  <footer id="support">
+    <span class="brand2">Cassette Adda</span>
+    <p>Ek free ambient radio, apni gali ke adde jaisa apna.</p>
+    <div class="social">
+      <a href="#">WhatsApp Group</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+    <p class="disclaimer">Yeh sirf ek design template hai. Audio playback aapki khud ki daali gayi song file se hota hai — koi bhi third-party gaana is site mein hosted nahi hai.</p>
+  </footer>
+
+<script>
+  const playlist = [
+    { file: 'songs/chali samiyana.mp3', title: 'Track 1' },
+    { file: 'songs/humko humise chura lo.mp3', title: 'Track 2' },
+    { file: 'songs/Namuna Jila Main Akhi Badu(MP3_320K).mp3', title: 'Track 3' },
+    { file: 'songs/official', title: 'Track 4' }
+    // Naya gaana add karna ho to yahan ek aur line jodo, jaise:
+    // { file: 'songs/song4.mp3', title: 'Mera Naya Gaana' }
+  ];
+
+
+   const audio = document.getElementById('radioAudio');
+  const playBtn = document.getElementById('playBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  const repeatBtn = document.getElementById('repeatBtn');
+  const nowPlaying = document.getElementById('nowPlaying');
+  const trackLabel = document.getElementById('trackLabel');
+  const reels = [document.getElementById('reelL'), document.getElementById('reelR')];
+  const seekBar = document.getElementById('seekBar');
+  const curTime = document.getElementById('curTime');
+  const durTime = document.getElementById('durTime');
+  const volBar = document.getElementById('volBar');
+  const volBtn = document.getElementById('volBtn');
+
+  let currentTrack = 0;
+  let shuffleOn = false;
+  let repeatOn = false;
+  audio.volume = 0.8;
+
+  function formatTime(sec) {
+    if (!isFinite(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return m + ':' + s;
+  }
+
+  function loadTrack(index, autoplay) {
+    currentTrack = (index + playlist.length) % playlist.length;
+    audio.src = playlist[currentTrack].file;
+    trackLabel.textContent = 'SIDE A — ' + playlist[currentTrack].title;
+    if (autoplay) {
+      audio.play().catch(() => {
+        nowPlaying.textContent = 'Song file nahi mili — "songs" folder mein comment ke hisaab se apna gaana add karo.';
+      });
+    }
+  }
+
+  function nextIndex() {
+    if (shuffleOn && playlist.length > 1) {
+      let r;
+      do { r = Math.floor(Math.random() * playlist.length); } while (r === currentTrack);
+      return r;
+    }
+    return currentTrack + 1;
+  }
+
+  loadTrack(0, false);
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play().catch(() => {
+        nowPlaying.textContent = 'Song file nahi mili — "songs" folder mein comment ke hisaab se apna gaana add karo.';
+      });
+    } else {
+      audio.pause();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    const wasPlaying = !audio.paused;
+    loadTrack(currentTrack - 1, wasPlaying);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    const wasPlaying = !audio.paused;
+    loadTrack(nextIndex(), wasPlaying);
+  });
+
+  shuffleBtn.addEventListener('click', () => {
+    shuffleOn = !shuffleOn;
+    shuffleBtn.setAttribute('aria-pressed', shuffleOn);
+  });
+
+  repeatBtn.addEventListener('click', () => {
+    repeatOn = !repeatOn;
+    repeatBtn.setAttribute('aria-pressed', repeatOn);
+  });
+
+  audio.addEventListener('ended', () => {
+    if (repeatOn) {
+      audio.currentTime = 0;
+      audio.play();
+    } else {
+      loadTrack(nextIndex(), true);
+    }
+  });
+
+  audio.addEventListener('loadedmetadata', () => {
+    seekBar.max = audio.duration;
+    durTime.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    seekBar.value = audio.currentTime;
+    curTime.textContent = formatTime(audio.currentTime);
+  });
+
+  seekBar.addEventListener('input', () => {
+    audio.currentTime = seekBar.value;
+  });
+
+  volBar.addEventListener('input', () => {
+    audio.volume = volBar.value / 100;
+    audio.muted = false;
+    volBtn.textContent = audio.volume === 0 ? '🔇' : (audio.volume < 0.5 ? '🔉' : '🔊');
+  });
+
+  volBtn.addEventListener('click', () => {
+    audio.muted = !audio.muted;
+    if (audio.muted) {
+      volBtn.textContent = '🔇';
+    } else {
+      volBar.value = Math.round(audio.volume * 100);
+      volBtn.textContent = audio.volume < 0.5 ? '🔉' : '🔊';
+    }
+  });
+
+  audio.addEventListener('play', () => {
+    playBtn.textContent = '❚❚ Roko';
+    playBtn.setAttribute('aria-pressed', 'true');
+    nowPlaying.textContent = '🎶 Tape chal rahi hai — Cassette Adda ON hai...';
+    reels.forEach(r => r.classList.add('spin'));
+  });
+
+  audio.addEventListener('pause', () => {
+    playBtn.textContent = '▶ Chalao';
+    playBtn.setAttribute('aria-pressed', 'false');
+    nowPlaying.textContent = 'Tape ruki hui hai — chalane ke liye button dabao.';
+    reels.forEach(r => r.classList.remove('spin'));
+  });
+
+  document.getElementById('staticMode').addEventListener('click', (e) => {
+    const on = document.body.classList.toggle('static-mode');
+    e.target.setAttribute('aria-pressed', on);
+    document.documentElement.style.filter = on ? 'contrast(1.15) saturate(1.3)' : 'none';
+  });
+
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      const btn = document.getElementById('shareBtn');
+      const original = btn.textContent;
+      btn.textContent = '✓ Link Copy Ho Gaya';
+      setTimeout(() => btn.textContent = original, 1800);
+    } catch (e) {}
+  });
+</script>
+</body>
+</html>
